@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAT Math</title>
+<meta name="description" content="SAT Math practice with the Desmos graphing calculator built in, step-by-step solutions and an AI tutor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2374C4FF'/%3E%3Cpath d='M9 22l5-6-5-6h11M9 22h11' fill='none' stroke='%2310142B' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/AtkinsonHyperlegibleNext.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="css/app.css?v=1">
+<script>try { var s = JSON.parse(localStorage.getItem("satm.settings") || "{}"); if (s && (s.theme === "light" || s.theme === "dark")) document.documentElement.setAttribute("data-theme", s.theme); } catch (e) {}</script>
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="#/"><i>Math</i><span>SAT Math</span></a>
+  <nav class="mainnav" aria-label="Main">
+    <a href="#/" data-nav="home" title="Home"><svg class="ico" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Home</span></a>
+    <a href="#/practice" data-nav="practice" title="Practice"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg><span>Practice</span></a>
+    <a href="#/playbook" data-nav="playbook" title="Desmos Playbook"><svg class="ico" viewBox="0 0 24 24"><path d="M4 19V5a1 1 0 0 1 1-1h6v15H5a1 1 0 0 0-1 1zm16 0V5a1 1 0 0 0-1-1h-6v15h6a1 1 0 0 1 1 1z"/></svg><span>Desmos Playbook</span></a>
+    <a href="#/test" data-nav="test" title="Timed Module"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg><span>Timed Module</span></a>
+    <a href="#/progress" data-nav="progress" title="Progress"><svg class="ico" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span>Progress</span></a>
+  </nav>
+  <a class="iconlink" href="#/settings" title="Settings" aria-label="Settings"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a>
+</header>
+<main id="app" tabindex="-1"><p class="loading">Loading…</p></main>
+
+<div id="calcPark" hidden>
+  <div id="calcWrap" class="calc-wrap">
+    <div class="calc-bar"><b>Desmos</b><span class="small muted calc-sub">Graphing calculator</span><span class="spacer"></span>
+      <button type="button" class="chipbtn" id="calcRef">Reference sheet</button><button type="button" class="chipbtn" id="calcClear">Clear</button></div>
+    <div id="calc" class="calc"><div class="calc-loading">Loading Desmos…</div></div>
+  </div>
+</div>
+<dialog id="refDlg" class="dlg" aria-labelledby="refTitle"><div class="dlg-h"><h2 id="refTitle">Reference sheet</h2><button type="button" class="iconbtn" id="refClose" aria-label="Close">&times;</button></div><div id="refBody"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script defer src="js/core.js?v=1"></script>
+<script defer src="js/figures.js?v=1"></script>
+<script defer src="js/skills.js?v=1"></script>
+<script defer src="js/bank-algebra.js?v=1"></script>
+<script defer src="js/bank-advanced.js?v=1"></script>
+<script defer src="js/bank-psda.js?v=1"></script>
+<script defer src="js/bank-geometry.js?v=1"></script>
+<script defer src="js/playbook.js?v=1"></script>
+<script defer src="js/store.js?v=1"></script>
+<script defer src="js/calc.js?v=1"></script>
+<script defer src="js/tutor.js?v=1"></script>
+<script defer src="js/app.js?v=1"></script>
+</body>
+</html>
