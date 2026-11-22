@@ -169,6 +169,21 @@
            '<b>AI Tutor</b><span class="muted small tutor-sub">Hints, explanations and Desmos help</span><span class="chev" aria-hidden="true"></span></button><div class="tutor-body" id="tutorBody"></div></div>';
   }
 
+  // The "paste your Gemini key" form, shared by the tutor panel and the screenshot tutor.
+  function keySetup(box, onSaved) {
+    box.innerHTML = '<p><b>Turn on the AI tutor</b> with your own free Gemini API key.</p><ol><li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a> and create an API key.</li>' +
+      "<li>Paste it here. It stays in this browser and is only sent to Google.</li></ol>" +
+      '<form class="keyform"><input type="password" placeholder="Paste your Gemini API key" autocomplete="off" aria-label="Gemini API key"><button class="btn primary small" type="submit">Save</button></form>';
+    $("form", box).onsubmit = function (e) {
+      e.preventDefault();
+      var v = $("input", box).value.trim();
+      if (!v) return;
+      Store.setSettings({ gemini: Object.assign({}, Store.settings().gemini || {}, { key: v }) });
+      toast("Key saved. The tutor is on.");
+      onSaved();
+    };
+  }
+
   // The tutor panel. o: {thread(), context(), quick(), onLoaded()}
   function TutorPanel(o) {
     var root = $("#tutor"), body = $("#tutorBody"), busy = false, pending = null, errorMsg = null;
@@ -179,20 +194,7 @@
     }
     function render() {
       var k = Tutor.keyInfo();
-      if (!k) {
-        body.innerHTML = '<div class="tsetup"><p><b>Turn on the AI tutor</b> with your own free Gemini API key.</p><ol><li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a> and create an API key.</li>' +
-          "<li>Paste it here. It stays in this browser and is only sent to Google.</li></ol>" +
-          '<form id="keyForm" class="keyform"><input type="password" id="keyIn" placeholder="Paste your Gemini API key" autocomplete="off" aria-label="Gemini API key"><button class="btn primary small" type="submit">Save</button></form></div>';
-        $("#keyForm").onsubmit = function (e) {
-          e.preventDefault();
-          var v = $("#keyIn").value.trim();
-          if (!v) return;
-          Store.setSettings({ gemini: Object.assign({}, Store.settings().gemini || {}, { key: v }) });
-          toast("Key saved. The tutor is on.");
-          render();
-        };
-        return;
-      }
+      if (!k) { body.innerHTML = '<div class="tsetup" id="keyBox"></div>'; keySetup($("#keyBox"), render); return; }
       var th = Tutor.thread(o.thread());
       body.innerHTML = '<div class="tmsgs" id="tmsgs">' + (th.length ? th.map(msgHTML).join("") : '<p class="tempty">Ask for a hint, a full explanation, or the Desmos way to solve it. The tutor can see the question and what you\'ve typed in Desmos.</p>') +
         (pending ? '<div class="tmsg me">' + h(pending) + '</div><div class="tmsg ai thinking"><span></span><span></span><span></span></div>' : "") +
@@ -264,10 +266,11 @@
     app.innerHTML =
       '<section class="hero"><p class="eyebrow">Digital SAT · Math</p><h1>Practice SAT Math with Desmos open, like on test day.</h1>' +
       '<p class="lead">Every question comes with a step-by-step solution and the fastest Desmos method. The AI tutor can see the question and your graph.</p>' +
-      '<div class="row"><a class="btn primary big" href="#/practice/mix">Start a 10-question set</a><a class="btn big" href="#/playbook">Learn the Desmos moves</a></div>' +
+      '<div class="row"><a class="btn primary big" href="#/practice/mix">Start a 10-question set</a><a class="btn big" href="#/tutor">Solve a screenshot</a></div>' +
       (t.n ? '<div class="stats"><div class="stat"><b>' + t.n + '</b><span>questions</span></div><div class="stat"><b>' + t.acc + '%</b><span>correct</span></div><div class="stat"><b>' + Store.streak() + "</b><span>day streak</span></div></div>" : "") +
       "</section>" +
       '<section class="tiles">' +
+      '<a class="tile hot" href="#/tutor"><span class="t">Stuck on a question? Send a screenshot</span><span class="s">The AI tutor solves it, checks the answer in Desmos and shows you the Desmos way step by step</span></a>' +
       (md ? '<a class="tile hot" href="#/test/run"><span class="t">Finish your timed module</span><span class="s">' + md.answers.filter(function (a) { return a != null; }).length + " of " + md.ids.length + " answered</span></a>" : "") +
       '<a class="tile" href="#/practice/skill/' + weak + '"><span class="t">Focus: ' + h(S.skills[weak].name) + '</span><span class="s">' + (Store.skill(weak).n ? "Your weakest skill right now" : "A good place to start") + "</span></a>" +
       '<a class="tile" href="#/playbook/' + ls.id + '"><span class="t">Desmos move: ' + h(ls.title) + '</span><span class="s">' + h(ls.tag) + " · a 3-minute lesson</span></a>" +
@@ -728,6 +731,7 @@
       else if (top === "practice") view = p[1] ? session(p[1], p[2]) : practiceIndex();
       else if (top === "test") view = p[1] === "run" ? moduleRun() : p[1] === "results" ? moduleResults() : p[1] === "review" ? moduleReview(parseInt(p[2], 10)) : moduleStart();
       else if (top === "playbook") view = p[1] ? lessonView(p[1]) : playbookList();
+      else if (top === "tutor") view = S.Snap.view();
       else if (top === "progress") view = progress();
       else if (top === "settings") view = settingsView();
       else { go("#/"); return; }
@@ -738,6 +742,7 @@
     if (!document.body.classList.contains("wide")) window.scrollTo(0, 0);
     app.focus({ preventScroll: true });
   }
+  S.ui = { $: $, $$: $$, h: h, typeset: typeset, toast: toast, go: go, ICON: ICON, bindPanes: bindPanes, showPane: showPane, keySetup: keySetup };
   window.addEventListener("hashchange", route);
   window.SATM.App = { route: route, go: go };
   route();

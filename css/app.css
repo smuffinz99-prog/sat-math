@@ -315,6 +315,81 @@ body.wide main { max-width: none; padding: 0; }
 .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 60; background: var(--ink); color: var(--bg); padding: 11px 18px; border-radius: 12px; display: flex; gap: 14px; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.25); max-width: calc(100vw - 32px); font-weight: 700; }
 .toast .linkbtn { color: var(--bg); }
 
+/* ---------- screenshot tutor ---------- */
+.snapwork { position: relative; }
+.sb-sub { flex: 0 1 auto; }
+.snapscroll { padding: 16px 22px 24px; }
+.snap-empty { max-width: 640px; padding: 14px 0 8px; }
+.snap-empty h1 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: -0.02em; margin-bottom: 10px; }
+.snap-empty .lead { margin-bottom: 18px; }
+.drop { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 30px 20px; border: 2.5px dashed var(--line); border-radius: 18px; background: var(--panel); cursor: pointer; text-align: center; margin-bottom: 12px; }
+.drop:hover, .drop:focus-within { border-color: var(--focus); }
+.drop .ico { width: 40px; height: 40px; color: var(--focus); stroke-width: 1.7; }
+.drop b { font-size: 1.12rem; }
+.drop span { color: var(--ink-2); font-size: .95rem; }
+.recent { margin-top: 22px; }
+.recent-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.recent-l { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.recent-i { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 8px; border: 2px solid transparent; border-radius: 12px; background: var(--panel); cursor: pointer; }
+.recent-i:hover { border-color: var(--line); }
+.recent-i img, .recent-i .noimg { width: 100%; height: 84px; object-fit: cover; object-position: top; border-radius: 8px; background: var(--bg); display: grid; place-items: center; }
+.recent-i .rt { font-weight: 700; font-size: .88rem; line-height: 1.3; }
+.snapme { max-width: 78%; }
+.snapimg { display: block; max-width: 100%; max-height: 280px; border-radius: 10px; background: #fff; }
+.snapme .snapimg + div { margin-top: 6px; }
+.solve { background: var(--panel); border-radius: 16px; padding: 16px 18px; margin: 10px 0 14px; max-width: 760px; border-bottom-left-radius: 4px; }
+.read { background: var(--bg); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; }
+.read summary { cursor: pointer; font-weight: 700; }
+.readq { margin-top: 8px; }
+.readc { padding-left: 1.2em; margin: 6px 0 2px; list-style: none; }
+.ansbox { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: space-between; background: var(--bg); border-radius: 12px; padding: 12px 14px; border-left: 5px solid var(--good); }
+.ansbox .label { margin-bottom: 2px; }
+.ans { font-size: 1.35rem; font-weight: 800; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-size: .84rem; font-weight: 800; background: var(--panel-2); color: var(--ink-2); }
+.badge.good { background: var(--good-bg); color: var(--good); }
+.badge.warn { background: var(--bad-bg); color: var(--bad); }
+.skillline { margin: 8px 0 0; }
+.bestline { margin: 10px 0 2px; }
+.dsteps { padding-left: 1.4em; margin: 8px 0 12px; }
+.dsteps li { margin: 6px 0; padding: 8px 10px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; }
+.dsteps li:hover { background: var(--bg); }
+.dsteps li.on { background: var(--bg); border-color: var(--focus); }
+.dsteps p { margin: 0 0 4px; }
+.look { color: var(--ink-2); font-weight: 700; }
+.xchips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.xchip { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 8px; background: var(--bg); border: 1.5px solid var(--line); }
+.xchip i { font-style: normal; font-size: .8rem; color: var(--ink-2); font-weight: 700; }
+.snapfig { display: block; position: relative; margin: 12px 0 4px; padding: 0; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; cursor: pointer; max-width: 560px; width: 100%; }
+.snapfig img { display: block; width: 100%; height: auto; }
+.snapfig span { position: absolute; right: 8px; bottom: 8px; background: rgba(22,26,46,.85); color: #fff; font-size: .8rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+.snapfig.wait { padding: 40px 0; text-align: center; color: #4A5170; cursor: default; background: var(--bg); }
+.trap { margin: 12px 0 6px; padding: 10px 14px; border-radius: 10px; background: var(--bg); border-left: 4px solid var(--psda); }
+.checks { margin: 8px 0; font-size: .92rem; }
+.checks summary { cursor: pointer; color: var(--ink-2); font-weight: 700; }
+.checks ul { margin: 6px 0; padding-left: 1.2em; }
+.checks .bad { color: var(--bad); }
+.solve .tquick { padding: 10px 0 0; }
+.busyrow { display: flex; align-items: center; gap: 10px; color: var(--ink-2); width: fit-content; }
+.busyrow .thinking { display: inline-flex; }
+.dzsnap { display: block; margin-top: 8px; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; cursor: pointer; max-width: 100%; }
+.dzsnap img { display: block; max-width: 100%; height: auto; }
+.snapcomp { border-top: 2px solid var(--line); padding-top: 6px; background: var(--bg); }
+.snapatt { display: flex; align-items: center; gap: 12px; margin: 4px 18px 2px; padding: 8px 10px; border-radius: 12px; background: var(--panel); }
+.snapatt img { width: 64px; height: 48px; object-fit: cover; border-radius: 8px; background: #fff; }
+.att-m { flex: 1; min-width: 0; }
+.seg.mini { margin: 4px 0 0; }
+.seg.mini button { padding: 4px 10px; font-size: .85rem; }
+.attach { display: grid; place-items: center; width: 44px; height: 42px; border-radius: 12px; border: 2px solid var(--line); cursor: pointer; color: var(--ink-2); flex: none; }
+.attach:hover, .attach:focus-within { border-color: var(--focus); color: var(--ink); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.dzcap { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); width: min(460px, calc(100% - 24px)); z-index: 5; background: var(--bg); color: var(--ink); border: 2px solid var(--focus); border-radius: 16px; padding: 10px 14px 12px; box-shadow: 0 12px 32px rgba(0,0,0,.25); }
+.cap-h { display: flex; align-items: center; color: var(--focus); }
+.cap-h .iconbtn { padding: 0 6px; font-size: 1.4rem; }
+.dzcap p { margin: 4px 0 8px; }
+.dropveil { position: absolute; inset: 0; z-index: 40; background: rgba(47,91,211,.12); border: 4px dashed var(--focus); display: grid; place-items: center; pointer-events: none; }
+.dropveil div { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--bg); padding: 22px 30px; border-radius: 16px; font-size: 1.1rem; }
+.dropveil .ico { width: 40px; height: 40px; color: var(--focus); }
+
 /* ---------- smaller screens ---------- */
 @media (max-width: 980px) {
   .mainnav a span { display: none; }
@@ -352,6 +427,14 @@ body.wide main { max-width: none; padding: 0; }
   .choice .pick { padding: 10px 12px; gap: 10px; }
   .strike { width: 40px; }
   .calc-sub { display: none; }
+  .sb-sub { display: none; }
+  .snapscroll { padding: 12px 14px 20px; }
+  .snapme { max-width: 92%; }
+  .solve { padding: 14px 14px; }
+  .snapatt { margin: 4px 12px 2px; }
+  .snapcomp .tform { padding: 6px 12px 4px; }
+  .snapcomp .tnote { padding: 2px 12px 8px; }
+  .ans { font-size: 1.2rem; }
   .calc-bar { flex-wrap: nowrap; }
 }
 /* Atkinson's zero is slashed; times, scores and table numbers use the system face (as in SAT Reading & Writing). */
